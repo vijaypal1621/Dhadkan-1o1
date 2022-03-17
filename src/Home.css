@@ -1,0 +1,26 @@
+.home{
+    display: flex;
+    flex-direction: row;
+}
+.left{
+    display: flex;
+    /* flex-direction: row;     */
+}
+.leftBox{
+    min-width: 200px;
+    background-color: aliceblue;
+    height: 200px;
+    margin-right: 122px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px ;
+}
+.leftBox > h1{
+    font-size: 5rem;
+}
+.right{
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+}
