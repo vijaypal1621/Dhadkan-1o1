@@ -1,0 +1,34 @@
+h2,p{
+    margin-bottom: 4px;
+    margin-top: 2;
+}
+.zoneBox{
+    color: aliceblue;
+    display: flex;
+    align-items: center;   
+    border-radius: 7px;
+    margin-bottom: 2px;
+    width: 35%;
+    justify-content: space-between;
+}
+
+.zoneLevel{
+    display: flex;    
+    flex-direction: column;
+    padding-left: 10px;
+}
+.zoneLevel > p{
+    height: 2px;
+    margin-bottom: 0;
+}
+.zonePercent{
+    text-align: center;
+    padding-right: 10px;
+}
+.zonePercent > h2{
+    margin-top: 0;
+}
+.avatar{
+    height: 50px;
+
+}
