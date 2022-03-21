@@ -9,13 +9,13 @@ import level5 from './level5.png';
 function Home(){
     return (
         <>
-        <div className="home">
-            <div className="left">
+        <div className="home row justify-content-center" style={{margin : "auto 0px"}} >
+            <div className="left col-2">
                 <div className="leftBox">
                     <h1>100</h1>
                 </div>                
             </div>
-            <div className="right">                
+            <div className="right col-4">                
                 <Zone level = "5" levelDesc = "Maximum" 
                 levelPercentage = "90-100%" 
                 levelColor="#ff2052"

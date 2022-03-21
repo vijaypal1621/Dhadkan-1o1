@@ -8,7 +8,7 @@ h2,p{
     align-items: center;   
     border-radius: 7px;
     margin-bottom: 2px;
-    /* width: 35%; */
+    /* width: 100%; */
     justify-content: space-between;
 }
 
@@ -20,6 +20,9 @@ h2,p{
 .zoneLevel > p{
     height: 2px;
     margin-bottom: 0;
+}
+.zoneLevel > h2{
+    padding-top: 20px;
 }
 .zonePercent{
     text-align: center;

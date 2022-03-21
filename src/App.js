@@ -6,8 +6,8 @@ function App() {
   return (
     <div className="app">      
       <div className="appMiddle">
-        <h3 style={{color : "white"}}>Heart Rate Monitor</h3>        
-        <Home />
+        <h1 style={{color : "white"}}>Heart Rate Monitor</h1>
+        <Home className="container"/>
       </div>      
     </div>
   );

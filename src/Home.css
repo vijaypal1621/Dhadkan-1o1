@@ -1,10 +1,11 @@
-.home{
+ .home{
     display: flex;
     flex-direction: row;
+    margin-left: 0;
+    margin-right: 0;
 }
 .left{
     display: flex;
-    /* flex-direction: row;     */
 }
 .leftBox{
     min-width: 200px;
@@ -24,3 +25,5 @@
     flex-direction: column;
     width: 500px;
 }
+
+
