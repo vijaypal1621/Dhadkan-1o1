@@ -8,17 +8,19 @@
     display: flex;
 }
 .leftBox{
-    min-width: 200px;
+    flex-direction: column;
+    min-width: 180px;
     background-color: aliceblue;
-    height: 200px;
+    height: 180px;
     margin-right: 122px;
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 10px ;
+    border-radius: 100% ;
 }
 .leftBox > h1{
     font-size: 5rem;
+    margin-bottom: 0;
 }
 .right{
     display: flex;

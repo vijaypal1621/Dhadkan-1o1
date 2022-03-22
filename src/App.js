@@ -6,8 +6,8 @@ import React, {useEffect,useState} from 'react';
 // import db from './firebase';
 // import firebase from './firebase';
 // import firebase from 'firebase';
-import {db} from './firebase';
-import {onValue, ref} from 'firebase/database';
+// import {db} from './firebase';
+// import {onValue, ref} from 'firebase/database';
 
 
 function App() {
@@ -30,7 +30,7 @@ function App() {
   return (
     <div className="app">      
       <div className="appMiddle">
-        <h1 style={{color : "white"}}>Heart Rate Monitor</h1>
+        <h1 style={{color : "white"}}>Dhadkan-1o1</h1>
         <Home className="container" />
       </div>      
     </div>

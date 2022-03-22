@@ -17,6 +17,25 @@ import {onValue, ref} from 'firebase/database';
 
 
 
+function rangeColor( pulseCount)
+{
+    if(pulseCount >= 150){
+        return "#ff2052";
+    }
+    else if(pulseCount >= 100){
+        return "#ed872d";
+    }
+    else if(pulseCount >= 70){
+        return "#03c03c";
+    }
+    else if(pulseCount >= 50){
+        return "#007fff";
+    }
+    else{
+        return "grey";
+    }
+}
+
 function Home(){
 
     const [pulseRate , setPulseRate] = useState("");
@@ -27,47 +46,49 @@ function Home(){
         
         // console.log(pulseRate);
         // console.log(snapshot.val().pulse);
-        console.log(pulseRate);
+        // console.log(pulseRate);
       } );
   
     }, [pulseRate]);
 
+
     return (
         <>
         <div className="home row justify-content-center" style={{margin : "auto 0px"}} >
-            <div className="left col-2">
-                <div className="leftBox">
-                    <h1>{pulseRate}</h1>
+            <div className="left offset-3 offset-md-0 col-8 col-md-2">
+                <div className="leftBox" style={{background : `${rangeColor(pulseRate)}`}}>
+                    <h1 className="pulseCountDisplay">{pulseRate}</h1>
+                    <p>BPM</p>
                 </div>                
             </div>
-            <div className="right col-4">                
-                <Zone level = "5" levelDesc = "Maximum" 
-                levelPercentage = "90-100%" 
+            <div className="right mt-2 col-10 col-md-4">                
+                <Zone level = "5" levelDesc = "High" 
+                levelPercentage = "150+" 
                 levelColor="#ff2052"
                     avtarImage =  {level5}
                 />
-                <Zone level = "4" levelDesc = "Hard" 
-                levelPercentage = "80-90%" 
+                <Zone level = "4" levelDesc = "Exercising" 
+                levelPercentage = "100-150" 
                 levelColor="#ed872d"
                 avtarImage =  {level4}
                 />
-                <Zone level = "3" levelDesc = "Moderate" 
-                levelPercentage = "70-80%" 
+                <Zone level = "3" levelDesc = "Normal" 
+                levelPercentage = "70-100" 
                 levelColor="#03c03c"
                 avtarImage =  {level3}
                 />
-                <Zone level = "2" levelDesc = "Light" 
-                levelPercentage = "60-70%" 
+                <Zone level = "2" levelDesc = "Good" 
+                levelPercentage = "50-70" 
                 levelColor="#007fff"
                 avtarImage =  {level2}
                 />
-                <Zone level = "1" levelDesc = "Very Light" 
+                {/* <Zone level = "1" levelDesc = "Very Light" 
                 levelPercentage = "50-60%" 
                 levelColor="#a2a2d0"
                 avtarImage =  {level2}
-                />
-                <Zone level = "0" levelDesc = "Minimal" 
-                levelPercentage = "0-50%" 
+                /> */}
+                <Zone level = "1" levelDesc = "Low" 
+                levelPercentage = "0-50" 
                 levelColor="grey"
                 avtarImage =  {level0}
                 />
