@@ -6,13 +6,38 @@ import level2 from './level2.png';
 import level3 from './level3.png';
 import level4 from './level4.png';
 import level5 from './level5.png';
+import {useEffect,useState} from 'react';
+// import firebase from '../src/firebase.js';
+// import firebase from 'firebase';
+// import db from './firebase';
+// import firebase from './firebase';
+// import firebase from 'firebase';
+import {db} from './firebase';
+import {onValue, ref} from 'firebase/database';
+
+
+
 function Home(){
+
+    const [pulseRate , setPulseRate] = useState("");
+  
+    useEffect(()=>{
+      onValue(ref(db),(snapshot) =>{
+        setPulseRate(snapshot.val().pulse);
+        
+        // console.log(pulseRate);
+        // console.log(snapshot.val().pulse);
+        console.log(pulseRate);
+      } );
+  
+    }, [pulseRate]);
+
     return (
         <>
         <div className="home row justify-content-center" style={{margin : "auto 0px"}} >
             <div className="left col-2">
                 <div className="leftBox">
-                    <h1>100</h1>
+                    <h1>{pulseRate}</h1>
                 </div>                
             </div>
             <div className="right col-4">                
