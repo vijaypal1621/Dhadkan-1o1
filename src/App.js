@@ -1,5 +1,7 @@
 import './App.css';
 import Home from './Home';
+import Header from "./Header";
+import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import React, {useEffect,useState} from 'react';
 // import firebase from '../src/firebase.js';
 // import firebase from 'firebase';
@@ -28,12 +30,27 @@ function App() {
 
 
   return (
-    <div className="app">      
-      <div className="appMiddle">
-        <h1 style={{color : "white"}}>Dhadkan-1o1</h1>
-        <Home className="container" />
-      </div>      
-    </div>
+    // 
+    <BrowserRouter>
+        <Header />
+        <Switch>
+        <Route exact path='/' component={Home}/>
+        </Switch>
+    </BrowserRouter>
+    // <BrowserRouter>
+    //     <div className="app">         
+              
+    //           {/* <h1> kjjfjd</h1>
+    //           <div className="app__body ">
+    //             <Switch>
+    //                <Route path="/home" component={Home} />
+    //                <Route path="/societies" component={Society} /> 
+    //                <Route path="/resources" component={Resources} />
+    //               <Redirect to="/home" />
+    //             </Switch>
+    //           </div> */}
+    //      </div>
+    //   </BrowserRouter>
   );
 }
 
