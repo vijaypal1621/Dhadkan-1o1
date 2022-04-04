@@ -5,11 +5,13 @@
   "dependencies": {
     "@emotion/react": "^11.8.2",
     "@emotion/styled": "^11.8.1",
+    "@fseehawer/react-circular-slider": "^2.5.0",
     "@material-ui/core": "^4.12.4",
     "@material-ui/icons": "^4.11.3",
-    "@fseehawer/react-circular-slider": "^2.5.0",
     "@mui/icons-material": "^5.5.1",
     "@mui/material": "^5.5.1",
+    "@progress/kendo-react-gauges": "^5.1.0",
+    "@syncfusion/ej2-react-circulargauge": "^20.1.47",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^12.0.0",
     "@testing-library/user-event": "^13.2.1",
@@ -18,9 +20,11 @@
     "material-ui": "^0.20.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-gauge-chart": "^0.4.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "5.0.0",
     "react-strap": "0.0.1",
+    "react-thermometer-component": "^1.0.1",
     "web-vitals": "^2.1.0"
   },
   "scripts": {

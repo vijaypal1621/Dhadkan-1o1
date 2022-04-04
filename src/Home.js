@@ -14,34 +14,40 @@ import {useEffect,useState} from 'react';
 // import firebase from 'firebase';
 import {db} from './firebase';
 import {onValue, ref} from 'firebase/database';
+import CircularSlider from '@fseehawer/react-circular-slider';
+import Thermometer from 'react-thermometer-component'
+import GaugeChart from 'react-gauge-chart'
 
 
+  
 
-function rangeColor( pulseCount)
-{
-    if(pulseCount >= 160){
-        return "#ff2052";
-    }
-    else if(pulseCount >= 120){
-        return "#ed872d";
-    }
-    else if(pulseCount >= 90){
-        return "#03c03c";
-    }
-    else if(pulseCount >= 60){
-        return "#007fff";
-    }else if(pulseCount >= 50){
-        return "#a2a2d0";
-    }
-    else{
-        return "grey";
-    }
-}
+// function rangeColor( pulseCount)
+// {
+//     if(pulseCount >= 160){
+//         return "#ff2052";
+//     }
+//     else if(pulseCount >= 120){
+//         return "#ed872d";
+//     }
+//     else if(pulseCount >= 90){
+//         return "#03c03c";
+//     }
+//     else if(pulseCount >= 60){
+//         return "#007fff";
+//     }else if(pulseCount >= 50){
+//         return "#a2a2d0";
+//     }
+//     else{
+//         return "grey";
+//     }
+// }
+
+
 
 function Home(){
 
     const [pulseRate , setPulseRate] = useState("");
-  
+      
     useEffect(()=>{
       onValue(ref(db),(snapshot) =>{
         setPulseRate(snapshot.val().pulse);
@@ -55,49 +61,57 @@ function Home(){
 
 
     return (
-        <>
-        <div className="home row justify-content-center" style={{margin : "auto 0px"}} >
-            <div className="left offset-2 offset-md-0 col-8 col-md-2">
-                <div className="leftBox" style={{background : `${rangeColor(pulseRate)}`}}>
-                    <h1 className="pulseCountDisplay">{pulseRate}</h1>
-                    <p>BPM</p>
-                </div>                
+        <div className="container">
+        <div className="row">
+            <div className="col-4">
+            <CircularSlider label="Temperature"
+                    labelColor="#005a58"
+                    knobColor="#005a58"
+                    progressColorFrom="#00bfbd"
+                    progressColorTo="#009c9a"
+                    progressSize={24}
+                    trackColor="#eeeeee"
+                    trackSize={24}
+                    max={212}
+                    min = {32}
+                    dataIndex = {97}
+                    appendToValue={"F"}
+                    onChange={ value => { console.log(value); } }/>
             </div>
-            <div className="right mt-2 col-10 col-md-4">                
-                <Zone level = "5" levelDesc = "High" 
-                levelPercentage = "160+" 
-                levelColor="#ff2052"
-                    avtarImage =  {level5}
-                />
-                <Zone level = "4" levelDesc = "Exercising" 
-                levelPercentage = "120-160" 
-                levelColor="#ed872d"
-                avtarImage =  {level4}
-                />
-                <Zone level = "3" levelDesc = "Normal" 
-                levelPercentage = "90-120" 
-                levelColor="#03c03c"
-                avtarImage =  {level3}
-                />
-                <Zone level = "2" levelDesc = "Good" 
-                levelPercentage = "60-90" 
-                levelColor="#007fff"
-                avtarImage =  {level2}
-                />
-                <Zone level = "1" levelDesc = "Low" 
-                levelPercentage = "50-60" 
-                levelColor="#a2a2d0"
-                avtarImage =  {level2}
-                />
-                <Zone level = "0" levelDesc = "Minimal" 
-                levelPercentage = "0-50" 
-                levelColor="grey"
-                avtarImage =  {level0}
-                />
+            <div className="col-4">
+            <div>
+                <CircularSlider label="Pulse"
+                    labelColor="#005a58"
+                    knobColor="#005a58"
+                    progressColorFrom="#00bfbd"
+                    progressColorTo="#009c9a"
+                    progressSize={24}
+                    trackColor="#eeeeee"
+                    trackSize={24}
+                    max={200}
+                    dataIndex = {pulseRate}
+                    appendToValue={"bpm"}
+                    onChange={ value => { console.log(value); } }/>
+                </div>
             </div>
-        </div>            
-        </>
-        
+            <div className="col-4">
+            <div>
+            <CircularSlider label="SpO2"
+                    labelColor="#005a58"
+                    knobColor="#005a58"
+                    progressColorFrom="#00bfbd"
+                    progressColorTo="#009c9a"
+                    progressSize={24}
+                    trackColor="#eeeeee"
+                    trackSize={24}
+                    max={100}
+                    dataIndex = {80}
+                    appendToValue={"%"}
+                    onChange={ value => { console.log(value); } }/>
+                </div>
+            </div>
+        </div>
+        </div>
     )
 
 };
