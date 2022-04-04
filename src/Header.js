@@ -15,11 +15,12 @@ import MenuItem from "@material-ui/core/MenuItem";
 // import Notices from "./Notices";
 import { useHistory } from "react-router-dom";
 // import Sidebar from "./Sidebar";
-// import { useStyles } from "./Sidebar";
+// // import { useStyles } from "./Sidebar";
+// import { useStateValue } from "./StateProvider";
 
 function Header() {
   // const classes = useStyles();
- 
+  const [{ user } ] = useStateValue();
 
   return (
     
@@ -97,6 +98,7 @@ function Header() {
               </NavLink>
             </Tooltip>
           </div>
+          
           <NavLink
                 to="/profile"
                 onClick={() => {
@@ -105,11 +107,12 @@ function Header() {
                   // setCurrent("home");
                 }}
               >
-               <Avatar />
+               <Avatar src={user?.photoURL} alt={user?.displayName} />
+               <h4 className="d-none d-md-block">{user?.displayName}</h4>
+               
               </NavLink>
             
-            {/* <Avatar src={user?.photoURL} alt={user?.displayName} />
-            <h4 className="d-none d-md-block">{user?.displayName}</h4> */}
+            
           </div>
         </div>
       </div>

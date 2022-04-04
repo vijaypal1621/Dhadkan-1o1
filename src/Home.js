@@ -12,7 +12,7 @@ import {useEffect,useState} from 'react';
 // import db from './firebase';
 // import firebase from './firebase';
 // import firebase from 'firebase';
-import {db} from './firebase';
+import {realdb} from './firebase';
 import {onValue, ref} from 'firebase/database';
 
 
@@ -43,7 +43,7 @@ function Home(){
     const [pulseRate , setPulseRate] = useState("");
   
     useEffect(()=>{
-      onValue(ref(db),(snapshot) =>{
+      onValue(ref(realdb),(snapshot) =>{
         setPulseRate(snapshot.val().pulse);
         
         // console.log(pulseRate);

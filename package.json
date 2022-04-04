@@ -5,9 +5,9 @@
   "dependencies": {
     "@emotion/react": "^11.8.2",
     "@emotion/styled": "^11.8.1",
+    "@fseehawer/react-circular-slider": "^2.5.0",
     "@material-ui/core": "^4.12.4",
     "@material-ui/icons": "^4.11.3",
-    "@fseehawer/react-circular-slider": "^2.5.0",
     "@mui/icons-material": "^5.5.1",
     "@mui/material": "^5.5.1",
     "@testing-library/jest-dom": "^5.14.1",
@@ -18,9 +18,11 @@
     "material-ui": "^0.20.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-redux": "^7.2.8",
     "react-router-dom": "^5.2.0",
     "react-scripts": "5.0.0",
     "react-strap": "0.0.1",
+    "redux": "^4.1.2",
     "web-vitals": "^2.1.0"
   },
   "scripts": {
