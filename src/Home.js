@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import { db } from "./firebase";
 import { onValue, ref } from "firebase/database";
 import CircularSlider from "@fseehawer/react-circular-slider";
+import Button from "@mui/material/Button";
 
 function Home() {
   const [pulseRate, setPulseRate] = useState("");
@@ -25,8 +26,8 @@ function Home() {
 
   return (
     <div className="container">
-      <div className="row">
-        <div className="col-4">
+      <div className="row pt-5 pb-5">
+        <div className="col-12 col-md-4">
           <CircularSlider
             label="Temperature"
             labelColor="#005a58"
@@ -45,7 +46,7 @@ function Home() {
             }}
           />
         </div>
-        <div className="col-4">
+        <div className="col-12 col-md-4">
           <div>
             <CircularSlider
               label="Pulse"
@@ -65,7 +66,7 @@ function Home() {
             />
           </div>
         </div>
-        <div className="col-4">
+        <div className="col-12 col-md-4">
           <div>
             <CircularSlider
               label="SpO2"
@@ -83,6 +84,20 @@ function Home() {
                 console.log(value);
               }}
             />
+          </div>
+        </div>
+        <div classname="row">
+          <div className="col-12 text-center p-5">
+            <Button
+              variant="contained"
+              color="warning"
+              onClick={() => {
+                alert("clicked");
+              }}
+              size="large"
+            >
+              Generate Report
+            </Button>
           </div>
         </div>
       </div>

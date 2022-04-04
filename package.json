@@ -11,6 +11,7 @@
     "@mui/icons-material": "^5.5.1",
     "@mui/material": "^5.5.1",
     "@progress/kendo-react-gauges": "^5.1.0",
+    "@react-pdf/renderer": "^2.1.1",
     "@syncfusion/ej2-react-circulargauge": "^20.1.47",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^12.0.0",
