@@ -1,0 +1,11 @@
+.report{
+    border: 2px solid red;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    margin: 10px;
+    box-shadow: 4px 6px 15px grey 
+}
+.fileImage{
+    width: 90px;
+}

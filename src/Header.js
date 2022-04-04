@@ -34,51 +34,8 @@ function Header() {
          {/* </div> */}         
       </div>
         <div className="header__center col-12 order-2 order-md-2 col-md-4">
-          <div className="header__option" id="home">
-            <Tooltip title="Home">
-              <NavLink
-                to="/home"
-                onClick={() => {
-                  // const currentPage = document.getElementById(current);
-                  // currentPage.classList.remove("header__option--active");
-                  // setCurrent("home");
-                }}
-              >
-                <HomeIcon style={{ color: " #16a596" }} fontSize="large" />
-              </NavLink>
-            </Tooltip>
-          </div>
-          <div className="header__option" id="societies">
-            <Tooltip title="Societies">
-              <NavLink
-                to="/societies"
-                onClick={() => {
-                  // const currentPage = document.getElementById(current);
-                  // currentPage.classList.remove("header__option--active");
-                  // setCurrent("societies");
-                }}
-              >
-                <ApartmentIcon style={{ color: " #16a596" }} fontSize="large" />
-              </NavLink>
-            </Tooltip>
-          </div>
-          <div className="header__option" id="resources">
-            <Tooltip title="Resources">
-              <NavLink
-                to="/resources"
-                onClick={() => {
-                  // const currentPage = document.getElementById(current);
-                  // currentPage.classList.remove("header__option--active");
-                  // setCurrent("resources");
-                }}
-              >
-                <AssignmentIcon
-                  style={{ color: " #16a596" }}
-                  fontSize="large"
-                />
-              </NavLink>
-            </Tooltip>
-          </div>
+         
+        
           <IconButton
             className="header__option d-block d-md-none"
             // onClick={handleClick}
@@ -126,6 +83,31 @@ function Header() {
             style={{ cursor: "pointer" }}
             // onClick={(event) => setAnchorEl(event.currentTarget)}
           >
+             <div className="header__option" id="home">
+            <Tooltip title="Home">
+              <NavLink
+                to="/home"
+                onClick={() => {
+                  // const currentPage = document.getElementById(current);
+                  // currentPage.classList.remove("header__option--active");
+                  // setCurrent("home");
+                }}
+              >
+                <HomeIcon style={{ color: " #16a596" }} fontSize="large" />
+              </NavLink>
+            </Tooltip>
+          </div>
+          <NavLink
+                to="/profile"
+                onClick={() => {
+                  // const currentPage = document.getElementById(current);
+                  // currentPage.classList.remove("header__option--active");
+                  // setCurrent("home");
+                }}
+              >
+               <Avatar />
+              </NavLink>
+            
             {/* <Avatar src={user?.photoURL} alt={user?.displayName} />
             <h4 className="d-none d-md-block">{user?.displayName}</h4> */}
           </div>

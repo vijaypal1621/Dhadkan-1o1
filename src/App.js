@@ -1,6 +1,7 @@
 import './App.css';
 import Home from './Home';
 import Header from "./Header";
+import Profile from './Profile';
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import React, {useEffect,useState} from 'react';
 // import firebase from '../src/firebase.js';
@@ -34,6 +35,8 @@ function App() {
     <BrowserRouter>
         <Header />
         <Switch>
+        <Route exact path='/home' component={Home}/>  
+        <Route exact path='/profile' component={Profile}/>
         <Route exact path='/' component={Home}/>
         </Switch>
     </BrowserRouter>

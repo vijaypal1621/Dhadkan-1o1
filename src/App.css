@@ -40,6 +40,7 @@
 .app{
   background-color: #282c34;
   min-height: 100vh;
+  overflow: hidden;
 }
 
 .appMiddle > h1{

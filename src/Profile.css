@@ -1,0 +1,8 @@
+.profileImage{
+    margin-top: 15px;
+    
+}
+.profileImage > img{
+    border-radius: 30% ;
+    border: 2px dashed;
+}
