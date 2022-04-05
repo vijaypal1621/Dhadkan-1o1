@@ -10,19 +10,63 @@ import { db } from "./firebase";
 import { onValue, ref } from "firebase/database";
 import CircularSlider from "@fseehawer/react-circular-slider";
 import Button from "@mui/material/Button";
+//import GeneratePDF from "./PDF";
+import {
+  PDFDownloadLink,
+  Document,
+  View,
+  Text,
+  Page,
+  StyleSheet,
+} from "@react-pdf/renderer";
+
+function GeneratePDF(temperature, spO2, pulseRate) {
+  const styles = StyleSheet.create({
+    page: {
+      flexDirection: "row",
+      backgroundColor: "#E4E4E4",
+    },
+    section: {
+      margin: 10,
+      padding: 10,
+      flexGrow: 1,
+    },
+  });
+
+  return (
+    <Document>
+      <Page size="A4" style={styles.page}>
+        <View style={styles.section}>
+          <Text>{temperature}</Text>
+        </View>
+        <View style={styles.section}>
+          <Text>{spO2}</Text>
+        </View>
+        <View style={styles.section}>
+          <Text>{pulseRate}</Text>
+        </View>
+      </Page>
+    </Document>
+  );
+}
 
 function Home() {
-  const [pulseRate, setPulseRate] = useState("");
+  const [pulseRate, setPulseRate] = useState(0);
+  const [spO2, setSpO2] = useState(0);
+  const [temperature, setTemperature] = useState(0);
+  const [pdf, setPdf] = useState(null);
 
   useEffect(() => {
     onValue(ref(db), (snapshot) => {
       setPulseRate(snapshot.val().pulse);
-
+      setSpO2(snapshot.val().spO2);
+      setTemperature(snapshot.val().temperature);
+      setPdf(GeneratePDF(temperature, spO2, pulseRate));
       // console.log(pulseRate);
       // console.log(snapshot.val().pulse);
       // console.log(pulseRate);
     });
-  }, [pulseRate]);
+  }, [pulseRate, spO2, temperature]);
 
   return (
     <div className="container">
@@ -39,7 +83,7 @@ function Home() {
             trackSize={24}
             max={212}
             min={32}
-            dataIndex={97}
+            dataIndex={temperature}
             appendToValue={"F"}
             onChange={(value) => {
               console.log(value);
@@ -78,7 +122,7 @@ function Home() {
               trackColor="#eeeeee"
               trackSize={24}
               max={100}
-              dataIndex={80}
+              dataIndex={spO2}
               appendToValue={"%"}
               onChange={(value) => {
                 console.log(value);
@@ -88,16 +132,11 @@ function Home() {
         </div>
         <div classname="row">
           <div className="col-12 text-center p-5">
-            <Button
-              variant="contained"
-              color="warning"
-              onClick={() => {
-                alert("clicked");
-              }}
-              size="large"
-            >
-              Generate Report
-            </Button>
+            <PDFDownloadLink document={pdf} fileName="somename.pdf">
+              {({ blob, url, loading, error }) =>
+                loading ? "Loading document..." : "Download now!"
+              }
+            </PDFDownloadLink>
           </div>
         </div>
       </div>
