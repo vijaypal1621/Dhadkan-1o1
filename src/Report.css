@@ -1,4 +1,4 @@
-.report{
+.report {
     border: 2px solid red;
     justify-content: center;
     align-items: center;
@@ -6,6 +6,7 @@
     margin: 10px;
     box-shadow: 4px 6px 15px grey 
 }
-.fileImage{
+
+.fileImage {
     width: 90px;
 }

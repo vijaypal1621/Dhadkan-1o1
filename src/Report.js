@@ -1,6 +1,6 @@
-import "./Report.css"
-import React from 'react';
-import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
+import "./Report.css";
+import React from "react";
+import CloudDownloadIcon from "@mui/icons-material/CloudDownload";
 
 function Report({file}){
     return(
@@ -20,6 +20,7 @@ function Report({file}){
         
         </>
     )
+
 }
 
 export default Report;
