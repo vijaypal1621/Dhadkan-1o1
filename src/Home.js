@@ -149,7 +149,7 @@ function Home() {
             <Button variant="contained" color="warning" size="large">
               <PDFDownloadLink
                 document={pdf}
-                fileName="report.pdf"
+                fileName={`report_${new Date().toString()}.pdf`}
                 style={{ color: "white", textDecoration: "none" }}
               >
                 {({ blob, url, loading, error }) =>
