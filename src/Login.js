@@ -10,17 +10,6 @@ function Login() {
   const [state, dispatch] = useStateValue();
 
   const signIn = () => {
-    // console.log(auth);
-    // auth
-    //     .signInWithPopup(provider)
-    //     .then(result => {
-    //         console.log(result);
-    //         // dispatch({
-    //         //     type:actionTypes.SET_USER,
-    //         //     user:result.user
-    //         // })
-    //     })
-    //     .catch((error) => alert(error.message))
     const auth = getAuth();
     signInWithPopup(auth, provider)
       .then((result) => {
@@ -51,7 +40,7 @@ function Login() {
   return (
     <div className="login">
       <div className="login__container">
-        <img src="./heartfavicon.jpg" alt="/"  style={{borderRadius: "25%"}} />
+        <img src="./heartfavicon.jpg" alt="/" style={{ borderRadius: "25%" }} />
         <h1>Sign in to Dhadkan</h1>
         <Button onClick={signIn}>Sign In With Google</Button>
       </div>

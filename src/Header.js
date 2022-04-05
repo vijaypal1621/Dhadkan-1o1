@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react";
 import "./Header.css";
 import HomeIcon from "@material-ui/icons/Home";
 import { Avatar, Tooltip, IconButton, Drawer } from "@material-ui/core";
-import ApartmentIcon from "@material-ui/icons/Apartment";
-import AssignmentIcon from "@material-ui/icons/Assignment";
 import MenuIcon from "@material-ui/icons/Menu";
 import { NavLink } from "react-router-dom";
 import { useStateValue } from "./StateProvider";
@@ -31,7 +29,6 @@ function Header() {
           style={{ borderRadius: "10%" }}
         />
         <h1 style={{ marginLeft: "5px" }}>Dhadkan</h1>
-        {/* </div> */}
       </div>
       <div className="header__center col-12 order-2 order-md-2 col-md-4">
         <IconButton
@@ -48,7 +45,6 @@ function Header() {
           // onClose={handleClose}
         >
           {/* <MenuItem onClick={toggleProfileDrawer(true)}>Profile</MenuItem>
-            <MenuItem onClick={toggleNoticesDrawer(true)}>Notices</MenuItem> */}
           {/* <MenuItem onClick={() => auth.signOut()}>Logout</MenuItem> */}
         </Menu>
       </div>
