@@ -102,7 +102,7 @@ function Header() {
             }}
           >
             <Avatar src={user?.photoURL} alt={user?.displayName} />
-            <h5 className="d-none d-md-block">{user?.displayName}</h5>
+            {/* <h5 className="d-none d-md-block">{user?.displayName}</h5> */}
           </NavLink>
         </div>
       </div>

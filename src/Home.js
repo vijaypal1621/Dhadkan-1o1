@@ -1,10 +1,17 @@
+
+// Changed
 import React from "react";
 import "./Home.css";
 import { useEffect, useState } from "react";
 import { realdb } from "./firebase";
+import { useStateValue } from "./StateProvider";
 import { onValue, ref } from "firebase/database";
 import CircularSlider from "@fseehawer/react-circular-slider";
 import Button from "@mui/material/Button";
+import { collection, collectionGroup, doc, setDoc } from "firebase/firestore"; 
+import { onSnapshot, query, where, } from "firebase/firestore";
+import {db} from './firebase';
+
 import {
   PDFDownloadLink,
   Document,
@@ -15,7 +22,9 @@ import {
   Image,
 } from "@react-pdf/renderer";
 
-function GeneratePDF(temperature, spO2, pulseRate) {
+
+function GeneratePDF(temperature, spO2, pulseRate,details,user) {
+  
   const styles = StyleSheet.create({
     image: {
       marginTop: "0px",
@@ -51,11 +60,11 @@ function GeneratePDF(temperature, spO2, pulseRate) {
         </Text>
         <View style={styles.section}>
           <Text style={styles.header}>Patient Details</Text>
-          <Text style={styles.info}>Name: Aaryan</Text>
-          <Text style={styles.info}>Age: 21</Text>
-          <Text style={styles.info}>Sex: Male</Text>
-          <Text style={styles.info}>Mobile Number: 9873634075</Text>
-          <Text style={styles.info}>Email: aaryanrajsarda@gmail.com</Text>
+          <Text style={styles.info}>Name: {user?.displayName}</Text>
+          <Text style={styles.info}>Age: {details===null ?(""):(details?.age)}</Text>
+          <Text style={styles.info}>Gender: {details===null ?(""):(details?.sex)}</Text>
+          <Text style={styles.info}>Mobile Number: {details===null ?(""):(details?.mobile)}</Text>
+          <Text style={styles.info}>Email: {user?.email}</Text>
         </View>
         <View style={styles.section}>
           <Text style={styles.info}>Temperature: {temperature}</Text>
@@ -72,15 +81,28 @@ function Home() {
   const [spO2, setSpO2] = useState(0);
   const [temperature, setTemperature] = useState(0);
   const [pdf, setPdf] = useState(null);
-
+  const [details,setDetails] = React.useState(null);
+  const [{ user } ] = useStateValue();
   useEffect(() => {
+
+    const unsub = onSnapshot(doc(db, "users", user?.uid), (doc) => {
+      // console.log("Current data: ", doc.data());
+      setDetails(doc.data());
+      // console.log(doc.collection);
+      // console.log(doc.reports);
+
     onValue(ref(realdb), (snapshot) => {
       setPulseRate(snapshot.val().pulse);
       setSpO2(snapshot.val().spo2);
       setTemperature(snapshot.val().temperature);
-      setPdf(GeneratePDF(temperature, spO2, pulseRate));
+      setPdf(GeneratePDF(temperature, spO2, pulseRate,details,user));
     });
-  }, [pulseRate, spO2, temperature]);
+
+    
+  });
+
+
+  }, [pulseRate, spO2, temperature, user?.uid]);
 
   return (
     <div className="container">
