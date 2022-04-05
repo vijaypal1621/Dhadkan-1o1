@@ -1,16 +1,18 @@
-
-// Changed
-import React from "react";
-import "./Home.css";
-import { useEffect, useState } from "react";
-import { realdb } from "./firebase";
+import React, { useEffect, useState } from "react";
+import { realdb, db } from "./firebase";
 import { useStateValue } from "./StateProvider";
 import { onValue, ref } from "firebase/database";
 import CircularSlider from "@fseehawer/react-circular-slider";
 import Button from "@mui/material/Button";
-import { collection, collectionGroup, doc, setDoc } from "firebase/firestore"; 
-import { onSnapshot, query, where, } from "firebase/firestore";
-import {db} from './firebase';
+import {
+  collection,
+  collectionGroup,
+  doc,
+  setDoc,
+  onSnapshot,
+  query,
+  where,
+} from "firebase/firestore";
 
 import {
   PDFDownloadLink,
@@ -22,9 +24,7 @@ import {
   Image,
 } from "@react-pdf/renderer";
 
-
-function GeneratePDF(temperature, spO2, pulseRate,details,user) {
-  
+function GeneratePDF(temperature, spO2, pulseRate, details, user) {
   const styles = StyleSheet.create({
     image: {
       marginTop: "0px",
@@ -61,9 +61,15 @@ function GeneratePDF(temperature, spO2, pulseRate,details,user) {
         <View style={styles.section}>
           <Text style={styles.header}>Patient Details</Text>
           <Text style={styles.info}>Name: {user?.displayName}</Text>
-          <Text style={styles.info}>Age: {details===null ?(""):(details?.age)}</Text>
-          <Text style={styles.info}>Gender: {details===null ?(""):(details?.sex)}</Text>
-          <Text style={styles.info}>Mobile Number: {details===null ?(""):(details?.mobile)}</Text>
+          <Text style={styles.info}>
+            Age: {details === null ? "" : details?.age}
+          </Text>
+          <Text style={styles.info}>
+            Gender: {details === null ? "" : details?.sex}
+          </Text>
+          <Text style={styles.info}>
+            Mobile Number: {details === null ? "" : details?.mobile}
+          </Text>
           <Text style={styles.info}>Email: {user?.email}</Text>
         </View>
         <View style={styles.section}>
@@ -81,55 +87,40 @@ function Home() {
   const [spO2, setSpO2] = useState(0);
   const [temperature, setTemperature] = useState(0);
   const [pdf, setPdf] = useState(null);
-  const [details,setDetails] = React.useState(null);
-  const [{ user } ] = useStateValue();
-  useEffect(() => {
+  const [details, setDetails] = React.useState(null);
+  const [{ user }] = useStateValue();
 
+  useEffect(() => {
     const unsub = onSnapshot(doc(db, "users", user?.uid), (doc) => {
       // console.log("Current data: ", doc.data());
       setDetails(doc.data());
       // console.log(doc.collection);
       // console.log(doc.reports);
 
-    onValue(ref(realdb), (snapshot) => {
-      setPulseRate(snapshot.val().pulse);
-      setSpO2(snapshot.val().spo2);
-      setTemperature(snapshot.val().temperature);
-      setPdf(GeneratePDF(temperature, spO2, pulseRate,details,user));
+      onValue(ref(realdb), (snapshot) => {
+        setPulseRate(snapshot.val().pulse);
+        setSpO2(snapshot.val().spo2);
+        setTemperature(snapshot.val().temperature);
+        setPdf(GeneratePDF(temperature, spO2, pulseRate, details, user));
+      });
     });
-
-    
-  });
-
-
   }, [pulseRate, spO2, temperature, user?.uid]);
 
   return (
-    <div className="container">
-      <div className="row pt-5 pb-5">
+    <div
+      className="container-fluid"
+      style={{
+        //backgroundImage: `linear-gradient(to right, #f6d365 0%, #fda085 100%)`,
+        backgroundImage: `url("https://www.sleepfoundation.org/wp-content/uploads/2021/06/Physical-Health.jpg")`,
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
+      <div className="row pt-5 pb-5 text-center">
         <div className="col-12 col-md-4">
-          <CircularSlider
-            label="Temperature"
-            labelColor="#005a58"
-            knobColor="#005a58"
-            progressColorFrom="#00bfbd"
-            progressColorTo="#009c9a"
-            progressSize={24}
-            trackColor="#eeeeee"
-            trackSize={24}
-            max={212}
-            min={32}
-            dataIndex={temperature}
-            appendToValue={"F"}
-            onChange={(value) => {
-              console.log(value);
-            }}
-          />
-        </div>
-        <div className="col-12 col-md-4">
-          <div>
+          <strong>
             <CircularSlider
-              label="Pulse"
+              label="Temperature"
               labelColor="#005a58"
               knobColor="#005a58"
               progressColorFrom="#00bfbd"
@@ -137,33 +128,61 @@ function Home() {
               progressSize={24}
               trackColor="#eeeeee"
               trackSize={24}
-              max={200}
-              dataIndex={pulseRate}
-              appendToValue={"bpm"}
+              max={212}
+              min={32}
+              dataIndex={temperature - 32}
+              appendToValue={"F"}
               onChange={(value) => {
                 console.log(value);
               }}
+              labelFontSize={"1.5rem"}
             />
+          </strong>
+        </div>
+        <div className="col-12 col-md-4">
+          <div>
+            <strong>
+              <CircularSlider
+                label="Pulse"
+                labelFontSize={"1.5rem"}
+                labelColor="#005a58"
+                knobColor="#005a58"
+                progressColorFrom="#00bfbd"
+                progressColorTo="#009c9a"
+                progressSize={24}
+                trackColor="#eeeeee"
+                trackSize={24}
+                max={200}
+                dataIndex={pulseRate}
+                appendToValue={"bpm"}
+                onChange={(value) => {
+                  console.log(value);
+                }}
+              />
+            </strong>
           </div>
         </div>
         <div className="col-12 col-md-4">
           <div>
-            <CircularSlider
-              label="SpO2"
-              labelColor="#005a58"
-              knobColor="#005a58"
-              progressColorFrom="#00bfbd"
-              progressColorTo="#009c9a"
-              progressSize={24}
-              trackColor="#eeeeee"
-              trackSize={24}
-              max={100}
-              dataIndex={spO2}
-              appendToValue={"%"}
-              onChange={(value) => {
-                console.log(value);
-              }}
-            />
+            <strong>
+              <CircularSlider
+                label="SpO2"
+                labelFontSize={"1.5rem"}
+                labelColor="#005a58"
+                knobColor="#005a58"
+                progressColorFrom="#00bfbd"
+                progressColorTo="#009c9a"
+                progressSize={24}
+                trackColor="#eeeeee"
+                trackSize={24}
+                max={100}
+                dataIndex={spO2}
+                appendToValue={"%"}
+                onChange={(value) => {
+                  console.log(value);
+                }}
+              />
+            </strong>
           </div>
         </div>
         <div classname="row">
