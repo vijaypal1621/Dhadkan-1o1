@@ -15,10 +15,12 @@ import MenuItem from "@material-ui/core/MenuItem";
 // import Notices from "./Notices";
 import { useHistory } from "react-router-dom";
 // import Sidebar from "./Sidebar";
-// import { useStyles } from "./Sidebar";
+// // import { useStyles } from "./Sidebar";
+// import { useStateValue } from "./StateProvider";
 
 function Header() {
   // const classes = useStyles();
+  const [{ user } ] = useStateValue();
 
   return (
     <div className="header row">
@@ -31,99 +33,96 @@ function Header() {
         <h1 style={{ marginLeft: "5px" }}>Dhadkan</h1>
         {/* </div> */}
       </div>
-      <div className="header__center col-12 order-2 order-md-2 col-md-4">
-        <div className="header__option" id="home">
-          <Tooltip title="Home">
-            <NavLink
-              to="/home"
-              onClick={() => {
-                // const currentPage = document.getElementById(current);
-                // currentPage.classList.remove("header__option--active");
-                // setCurrent("home");
-              }}
-            >
-              <HomeIcon style={{ color: " #16a596" }} fontSize="large" />
-            </NavLink>
-          </Tooltip>
-        </div>
-        <div className="header__option" id="societies">
-          <Tooltip title="Societies">
-            <NavLink
-              to="/societies"
-              onClick={() => {
-                // const currentPage = document.getElementById(current);
-                // currentPage.classList.remove("header__option--active");
-                // setCurrent("societies");
-              }}
-            >
-              <ApartmentIcon style={{ color: " #16a596" }} fontSize="large" />
-            </NavLink>
-          </Tooltip>
-        </div>
-        <div className="header__option" id="resources">
-          <Tooltip title="Resources">
-            <NavLink
-              to="/resources"
-              onClick={() => {
-                // const currentPage = document.getElementById(current);
-                // currentPage.classList.remove("header__option--active");
-                // setCurrent("resources");
-              }}
-            >
-              <AssignmentIcon style={{ color: " #16a596" }} fontSize="large" />
-            </NavLink>
-          </Tooltip>
-        </div>
-        <IconButton
-          className="header__option d-block d-md-none"
-          // onClick={handleClick}
-        >
-          <MenuIcon style={{ color: " #16a596" }} fontSize="large" />
-        </IconButton>
-        <Menu
-          id="simple-menu"
-          // anchorEl={menu}
-          // keepMounted
-          // open={Boolean(menu)}
-          // onClose={handleClose}
-        >
-          {/* <MenuItem onClick={toggleProfileDrawer(true)}>Profile</MenuItem>
+        <div className="header__center col-12 order-2 order-md-2 col-md-4">
+         
+        
+          <IconButton
+            className="header__option d-block d-md-none"
+            // onClick={handleClick}
+          >
+            <MenuIcon style={{ color: " #16a596" }} fontSize="large" />
+          </IconButton>
+          <Menu
+            id="simple-menu"
+            // anchorEl={menu}
+            // keepMounted
+            // open={Boolean(menu)}
+            // onClose={handleClose}
+          >
+            {/* <MenuItem onClick={toggleProfileDrawer(true)}>Profile</MenuItem>
             <MenuItem onClick={toggleNoticesDrawer(true)}>Notices</MenuItem> */}
-          {/* <MenuItem onClick={() => auth.signOut()}>Logout</MenuItem> */}
-        </Menu>
-      </div>
-      <div className="header__right col-6 order-1 order-md-3 col-md-4">
-        <Popover
-          // id={id}
-          // open={open}
-          // anchorEl={anchorEl}
-          // onClose={handlePopClose}
-          anchorOrigin={{
-            vertical: "bottom",
-            horizontal: "center",
-          }}
-          transformOrigin={{
-            vertical: "top",
-            horizontal: "center",
-          }}
-        >
-          <Typography>
-            <Button style={{ color: "white", backgroundColor: "#16a596" }}>
-              Logout
-            </Button>
-          </Typography>
-        </Popover>
-        <div
-          className="header__info"
-          style={{ cursor: "pointer" }}
-          // onClick={(event) => setAnchorEl(event.currentTarget)}
-        >
-          {/* <Avatar src={user?.photoURL} alt={user?.displayName} />
-            <h4 className="d-none d-md-block">{user?.displayName}</h4> */}
+            {/* <MenuItem onClick={() => auth.signOut()}>Logout</MenuItem> */}
+          </Menu>
+        </div>
+        <div className="header__right col-6 order-1 order-md-3 col-md-4">
+          <Popover
+            // id={id}
+            // open={open}
+            // anchorEl={anchorEl}
+            // onClose={handlePopClose}
+            anchorOrigin={{
+              vertical: "bottom",
+              horizontal: "center",
+            }}
+            transformOrigin={{
+              vertical: "top",
+              horizontal: "center",
+            }}
+          >
+            <Typography>
+              <Button
+                style={{ color: "white", backgroundColor: "#16a596" }}
+               
+              >
+                Logout
+              </Button>
+            </Typography>
+          </Popover>
+          <div
+            className="header__info"
+            style={{ cursor: "pointer" }}
+            // onClick={(event) => setAnchorEl(event.currentTarget)}
+          >
+             <div className="header__option" id="home">
+            <Tooltip title="Home">
+              <NavLink
+                to="/home"
+                onClick={() => {
+                  // const currentPage = document.getElementById(current);
+                  // currentPage.classList.remove("header__option--active");
+                  // setCurrent("home");
+                }}
+              >
+                <HomeIcon style={{ color: " #16a596" }} fontSize="large" />
+              </NavLink>
+            </Tooltip>
+          </div>
+          
+          <NavLink
+                to="/profile"
+                onClick={() => {
+                  // const currentPage = document.getElementById(current);
+                  // currentPage.classList.remove("header__option--active");
+                  // setCurrent("home");
+                }}
+              >
+               <Avatar src={user?.photoURL} alt={user?.displayName} />
+               <h5 className="d-none d-md-block">{user?.displayName}</h5>
+               
+              </NavLink>
+            
+            
+          </div>
         </div>
       </div>
-    </div>
+    
   );
 }
 
 export default Header;
+
+// db.collection("users").doc(authUser.user.uid).set({
+//   branch: "",
+//   section: "",
+//   year: "",
+// });

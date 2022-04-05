@@ -19,6 +19,7 @@ import {
   Page,
   StyleSheet,
 } from "@react-pdf/renderer";
+import {realdb} from './firebase';
 
 function GeneratePDF(temperature, spO2, pulseRate) {
   const styles = StyleSheet.create({
