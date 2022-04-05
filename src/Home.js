@@ -1,16 +1,10 @@
 import React from "react";
 import "./Home.css";
 import { useEffect, useState } from "react";
-// import firebase from '../src/firebase.js';
-// import firebase from 'firebase';
-// import db from './firebase';
-// import firebase from './firebase';
-// import firebase from 'firebase';
-import { db } from "./firebase";
+import { realdb } from "./firebase";
 import { onValue, ref } from "firebase/database";
 import CircularSlider from "@fseehawer/react-circular-slider";
 import Button from "@mui/material/Button";
-//import GeneratePDF from "./PDF";
 import {
   PDFDownloadLink,
   Document,
@@ -18,33 +12,55 @@ import {
   Text,
   Page,
   StyleSheet,
+  Image,
 } from "@react-pdf/renderer";
-import { realdb } from "./firebase";
 
 function GeneratePDF(temperature, spO2, pulseRate) {
   const styles = StyleSheet.create({
-    page: {
-      flexDirection: "row",
-      backgroundColor: "#E4E4E4",
+    image: {
+      marginTop: "0px",
+      height: "18%",
+      width: "100%",
     },
     section: {
+      border: "1px solid black",
       margin: 10,
       padding: 10,
-      flexGrow: 1,
+    },
+    header: {
+      fontSize: 24,
+      textAlign: "center",
+      margin: 10,
+    },
+    info: {
+      padding: "10px",
     },
   });
 
   return (
-    <Document>
-      <Page size="A4" style={styles.page}>
+    <Document
+      title="report"
+      author="Dhadkan"
+      subject="Report"
+      language="English"
+    >
+      <Page size="A4" orientation="portrait">
+        <Image src="./pdfHeader.jpg" style={styles.image} fixed />
+        <Text style={{ marginLeft: "auto", marginRight: "10px" }}>
+          {new Date().toString().split(" GMT")[0]}
+        </Text>
         <View style={styles.section}>
-          <Text>{temperature}</Text>
+          <Text style={styles.header}>Patient Details</Text>
+          <Text style={styles.info}>Name: Aaryan</Text>
+          <Text style={styles.info}>Age: 21</Text>
+          <Text style={styles.info}>Sex: Male</Text>
+          <Text style={styles.info}>Mobile Number: 9873634075</Text>
+          <Text style={styles.info}>Email: aaryanrajsarda@gmail.com</Text>
         </View>
         <View style={styles.section}>
-          <Text>{spO2}</Text>
-        </View>
-        <View style={styles.section}>
-          <Text>{pulseRate}</Text>
+          <Text style={styles.info}>Temperature: {temperature}</Text>
+          <Text style={styles.info}>SpO2: {spO2}</Text>
+          <Text style={styles.info}>Pulse Rate: {pulseRate}</Text>
         </View>
       </Page>
     </Document>
@@ -58,14 +74,11 @@ function Home() {
   const [pdf, setPdf] = useState(null);
 
   useEffect(() => {
-    onValue(ref(db), (snapshot) => {
+    onValue(ref(realdb), (snapshot) => {
       setPulseRate(snapshot.val().pulse);
-      setSpO2(snapshot.val().spO2);
+      setSpO2(snapshot.val().spo2);
       setTemperature(snapshot.val().temperature);
       setPdf(GeneratePDF(temperature, spO2, pulseRate));
-      // console.log(pulseRate);
-      // console.log(snapshot.val().pulse);
-      // console.log(pulseRate);
     });
   }, [pulseRate, spO2, temperature]);
 
@@ -131,16 +144,16 @@ function Home() {
             />
           </div>
         </div>
-        <div className="row">
+        <div classname="row">
           <div className="col-12 text-center p-5">
             <Button variant="contained" color="warning" size="large">
               <PDFDownloadLink
                 document={pdf}
-                fileName="somename.pdf"
+                fileName="report.pdf"
                 style={{ color: "white", textDecoration: "none" }}
               >
                 {({ blob, url, loading, error }) =>
-                  loading ? "Loading document..." : "Download now!"
+                  loading ? "Loading document..." : "Generate Report"
                 }
               </PDFDownloadLink>
             </Button>

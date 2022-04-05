@@ -9,7 +9,7 @@ function Report() {
         <div className="col-2">
           <img
             style={{ width: 90 }}
-            clasName="col-2 fileImage"
+            className="col-2 fileImage"
             src="./fileImage.jpg"
             alt="/"
           />
