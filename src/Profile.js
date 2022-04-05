@@ -1,5 +1,5 @@
 import "./Profile.css"
-import React from 'react';
+import React, { useEffect } from 'react';
 import Report from './Report';
 import { useStateValue } from "./StateProvider";
 import EditIcon from "@material-ui/icons/Edit";
@@ -9,6 +9,7 @@ import Popover from "@material-ui/core/Popover";
 import { Button, Tooltip } from "@material-ui/core";
 import {db} from './firebase';
 import { collection, doc, setDoc } from "firebase/firestore"; 
+import { onSnapshot } from "firebase/firestore";
 // import { doc, setDoc } from "firebase/firestore"; 
 function rand() {
     return Math.round(Math.random() * 20) - 10;
@@ -67,8 +68,19 @@ function Profile(){
     const [sex , setSex] = React.useState(0);
     // const [EmailId , setEmailId] = React.useState(0);
     const [mobile , setMobile] = React.useState(0);
+    const [details,setDetails] = React.useState(null);
     
-    console.log(collection(db,"users")  );
+
+    React.useEffect(()=>{
+        const unsub = onSnapshot(doc(db, "users", user?.uid), (doc) => {
+            // console.log("Current data: ", doc.data());
+            setDetails(doc.data());
+
+        });
+    },[])
+
+
+    // console.log(details?.sex );
     const handleOpenModal = () => {
         console.log("open");        
 
@@ -116,6 +128,7 @@ function Profile(){
               className="col-6 profile__update"
               name="age"
               id="age"
+              type="number"
               value={age}
               onChange={(e) => setAge(e.target.value)}
             >              
@@ -140,7 +153,7 @@ function Profile(){
             </label>
             <input
               className="col-6 profile__update"
-              name="sex"
+              name="sex"              
               id="sex"
               value={sex}
               onChange={(e) => setSex(e.target.value)}
@@ -156,6 +169,7 @@ function Profile(){
               name="mobile"
               id="mobile"
               value={mobile}
+              type="number"
               onChange={(e) => setMobile(e.target.value)}
             >              
             </input>
@@ -178,7 +192,7 @@ function Profile(){
     return (
         <>
             <div className="profileImage offset-5 col-2">
-                <img src="https://avatars.githubusercontent.com/u/62353456?v=4"  style={{width : "100%"}} alt="/" />
+                <img src={user?.photoURL}  style={{width : "100%"}} alt="/" />
                 
             </div>
             <div className = "editIcon">
@@ -212,15 +226,15 @@ function Profile(){
                         </tr>
                         <tr>
                         <th scope="row">Age</th>
-                        <td>Mark</td>      
+                        <td>{details===null ?(""):(details?.age)}</td>
                         </tr>
                         <tr>
                         <th scope="row">Blood Group</th>
-                        <td>Mark</td>      
+                        <td>{details===null ?(""):(details?.blood)}</td>
                         </tr>
                         <tr>
                         <th scope="row">Sex</th>
-                        <td>Mark</td>      
+                        <td>{details===null ?(""):(details?.sex)}</td>
                         </tr>
                         <tr>
                         <th scope="row">Email Id</th>
@@ -228,14 +242,11 @@ function Profile(){
                         </tr>
                         <tr>
                         <th scope="row">Mobile Number</th>
-                        <td>Mark</td>      
+                        <td>{details===null ?(""):(details?.mobile)}</td>
                         </tr>                           
                     </tbody>
                 </table>
-            </div>   
-            <div className="col-1">
-            
-            </div>
+            </div>            
             <div className="Reports">
                 <Report />
                 <Report />
