@@ -153,7 +153,8 @@ function Home() {
                 style={{ color: "white", textDecoration: "none" }}
               >
                 {({ blob, url, loading, error }) =>
-                  loading ? "Loading document..." : "Generate Report"
+                  console.log(blob) || //blob: the blob object of the pdf
+                  (loading ? "Loading document..." : "Generate Report")
                 }
               </PDFDownloadLink>
             </Button>
