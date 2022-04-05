@@ -8,6 +8,7 @@
   top: 0;
   box-shadow: 0px 5px 8px -9px rgba(0, 0, 0, 0.75);
 }
+
 .header__left {
   display: flex;
   justify-content: flex-start;
@@ -26,16 +27,19 @@
 .header__left > img {
   height: 40px;
 }
+
 .header__input > input {
   border: none;
   background-color: transparent;
   outline-width: 0;
 }
+
 .header__center {
   display: flex;
   justify-content: center;
   flex: 1;
 }
+
 .header__option > .MuiSvgIcon-root {
   color: gray;
 }
@@ -50,6 +54,7 @@
   padding: 0 30px;
   cursor: pointer;
 }
+
 .header__option:hover {
   background-color: #eff2f4;
   border-radius: 10px;
@@ -57,9 +62,11 @@
   padding: 0 30px;
   border-bottom: none;
 }
+
 .header__option--active {
   border-bottom: 4px solid #16a596;
 }
+
 .header__option--active > .MuiSvgIcon-root {
   color: #16a596;
 }
@@ -68,9 +75,11 @@
   display: flex;
   align-items: center;
 }
+
 .header__info > h4 {
   margin-left: 10px;
 }
+
 .header__right {
   display: flex;
   justify-content: flex-end;

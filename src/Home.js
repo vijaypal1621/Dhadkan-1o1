@@ -19,7 +19,7 @@ import {
   Page,
   StyleSheet,
 } from "@react-pdf/renderer";
-import {realdb} from './firebase';
+import { realdb } from "./firebase";
 
 function GeneratePDF(temperature, spO2, pulseRate) {
   const styles = StyleSheet.create({
@@ -131,7 +131,7 @@ function Home() {
             />
           </div>
         </div>
-        <div classname="row">
+        <div className="row">
           <div className="col-12 text-center p-5">
             <Button variant="contained" color="warning" size="large">
               <PDFDownloadLink

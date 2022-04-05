@@ -20,7 +20,7 @@ import { useHistory } from "react-router-dom";
 
 function Header() {
   // const classes = useStyles();
-  const [{ user } ] = useStateValue();
+  const [{ user }] = useStateValue();
 
   return (
     <div className="header row">
@@ -33,57 +33,52 @@ function Header() {
         <h1 style={{ marginLeft: "5px" }}>Dhadkan</h1>
         {/* </div> */}
       </div>
-        <div className="header__center col-12 order-2 order-md-2 col-md-4">
-         
-        
-          <IconButton
-            className="header__option d-block d-md-none"
-            // onClick={handleClick}
-          >
-            <MenuIcon style={{ color: " #16a596" }} fontSize="large" />
-          </IconButton>
-          <Menu
-            id="simple-menu"
-            // anchorEl={menu}
-            // keepMounted
-            // open={Boolean(menu)}
-            // onClose={handleClose}
-          >
-            {/* <MenuItem onClick={toggleProfileDrawer(true)}>Profile</MenuItem>
+      <div className="header__center col-12 order-2 order-md-2 col-md-4">
+        <IconButton
+          className="header__option d-block d-md-none"
+          // onClick={handleClick}
+        >
+          <MenuIcon style={{ color: " #16a596" }} fontSize="large" />
+        </IconButton>
+        <Menu
+          id="simple-menu"
+          // anchorEl={menu}
+          // keepMounted
+          // open={Boolean(menu)}
+          // onClose={handleClose}
+        >
+          {/* <MenuItem onClick={toggleProfileDrawer(true)}>Profile</MenuItem>
             <MenuItem onClick={toggleNoticesDrawer(true)}>Notices</MenuItem> */}
-            {/* <MenuItem onClick={() => auth.signOut()}>Logout</MenuItem> */}
-          </Menu>
-        </div>
-        <div className="header__right col-6 order-1 order-md-3 col-md-4">
-          <Popover
-            // id={id}
-            // open={open}
-            // anchorEl={anchorEl}
-            // onClose={handlePopClose}
-            anchorOrigin={{
-              vertical: "bottom",
-              horizontal: "center",
-            }}
-            transformOrigin={{
-              vertical: "top",
-              horizontal: "center",
-            }}
-          >
-            <Typography>
-              <Button
-                style={{ color: "white", backgroundColor: "#16a596" }}
-               
-              >
-                Logout
-              </Button>
-            </Typography>
-          </Popover>
-          <div
-            className="header__info"
-            style={{ cursor: "pointer" }}
-            // onClick={(event) => setAnchorEl(event.currentTarget)}
-          >
-             <div className="header__option" id="home">
+          {/* <MenuItem onClick={() => auth.signOut()}>Logout</MenuItem> */}
+        </Menu>
+      </div>
+      <div className="header__right col-6 order-1 order-md-3 col-md-4">
+        <Popover
+          // id={id}
+          // open={open}
+          // anchorEl={anchorEl}
+          // onClose={handlePopClose}
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "center",
+          }}
+          transformOrigin={{
+            vertical: "top",
+            horizontal: "center",
+          }}
+        >
+          <Typography>
+            <Button style={{ color: "white", backgroundColor: "#16a596" }}>
+              Logout
+            </Button>
+          </Typography>
+        </Popover>
+        <div
+          className="header__info"
+          style={{ cursor: "pointer" }}
+          // onClick={(event) => setAnchorEl(event.currentTarget)}
+        >
+          <div className="header__option" id="home">
             <Tooltip title="Home">
               <NavLink
                 to="/home"
@@ -97,25 +92,21 @@ function Header() {
               </NavLink>
             </Tooltip>
           </div>
-          
+
           <NavLink
-                to="/profile"
-                onClick={() => {
-                  // const currentPage = document.getElementById(current);
-                  // currentPage.classList.remove("header__option--active");
-                  // setCurrent("home");
-                }}
-              >
-               <Avatar src={user?.photoURL} alt={user?.displayName} />
-               <h5 className="d-none d-md-block">{user?.displayName}</h5>
-               
-              </NavLink>
-            
-            
-          </div>
+            to="/profile"
+            onClick={() => {
+              // const currentPage = document.getElementById(current);
+              // currentPage.classList.remove("header__option--active");
+              // setCurrent("home");
+            }}
+          >
+            <Avatar src={user?.photoURL} alt={user?.displayName} />
+            <h5 className="d-none d-md-block">{user?.displayName}</h5>
+          </NavLink>
         </div>
       </div>
-    
+    </div>
   );
 }
 
