@@ -1,6 +1,7 @@
 import "./Profile.css"
 import React, { useEffect } from 'react';
 import Report from './Report';
+// import firebase from './firebase';
 import { useStateValue } from "./StateProvider";
 import EditIcon from "@material-ui/icons/Edit";
 import { makeStyles } from "@material-ui/core/styles";
@@ -8,8 +9,8 @@ import { Avatar, InputLabel, Modal, Typography } from "@material-ui/core";
 import Popover from "@material-ui/core/Popover";
 import { Button, Tooltip } from "@material-ui/core";
 import {db} from './firebase';
-import { collection, doc, setDoc } from "firebase/firestore"; 
-import { onSnapshot } from "firebase/firestore";
+import { collection, collectionGroup, doc, setDoc } from "firebase/firestore"; 
+import { onSnapshot, query, where, } from "firebase/firestore";
 // import { doc, setDoc } from "firebase/firestore"; 
 function rand() {
     return Math.round(Math.random() * 20) - 10;
@@ -69,14 +70,78 @@ function Profile(){
     // const [EmailId , setEmailId] = React.useState(0);
     const [mobile , setMobile] = React.useState(0);
     const [details,setDetails] = React.useState(null);
-    
+    const [reports,setReports] = React.useState([]);
 
     React.useEffect(()=>{
         const unsub = onSnapshot(doc(db, "users", user?.uid), (doc) => {
             // console.log("Current data: ", doc.data());
             setDetails(doc.data());
-
+            // console.log(doc.collection);
+            // console.log(doc.reports);
         });
+
+        const d = onSnapshot(collection(db, "users/lTcjV3oVvWOntLgS9vVhIVhNfp73/reports"), (snap) => {
+            // console.log("Current data: ", doc.data());
+            // setDetails(doc);
+            console.log(doc);
+            // console.log(doc.reports);
+        });
+
+        // const x = collection(db,"users/lTcjV3oVvWOntLgS9vVhIVhNfp73/reports");
+        // console.log(x);
+        const ref = `users/${user?.uid}/reports`;
+        const unsubscribe = onSnapshot(
+            collection(db, ref), 
+            (snapshot) => {
+              snapshot.docs.forEach((doc)=>{
+                  console.log(doc.data());
+                //   setReports(doc.data());
+              })
+            setReports(snapshot.docs);
+            // console.log(reports[0].data())
+            },
+            (error) => {
+              console.log(error);
+            });
+      
+        // for(let i = 0 ; i<reports.length;i++){
+        //     console.log(reports[i].data());
+        // }
+        
+        
+        
+        // setDetails(doc.data());
+        // console.log(doc.collection);
+        // console.log(doc.reports);
+    
+
+        // const tel = onSnapshot(collection(db,"users",user?.uid),(doc)=>{
+        //         console.log(doc);
+        // });
+
+        // console.log(tel);
+        // const hel = 
+        // db.collection('users').doc(user?.uid)
+        //       .collection('reports')
+        //       .orderBy('timestamp', 'asc')
+        //       .onSnapshot((snapshot) => setReports( 
+        //               snapshot.docs.map(doc => doc.data() )
+        //           )
+        //       )
+        
+        // console.log(reports);
+        // const q = query(collection(db, "users"), where(doc.id, "==", user?.uid));
+        // console.log( q);
+// const unsubscribe = onSnapshot(q, (querySnapshot) => {
+//   const cities = [];
+//   querySnapshot.forEach((doc) => {
+//       cities.push(doc.data().name);
+//   });
+//   console.log("Current cities in CA: ", cities.join(", "));
+// });
+
+
+        
     },[])
 
 
@@ -189,6 +254,15 @@ function Profile(){
 
       console.log(user);
 
+        // const checkreports = (
+        //     if(reports.length == 0){
+        //         return (
+        //             <h2>You </h2></h2>
+        //         )
+        //     }
+        // )
+
+
     return (
         <>
             <div className="profileImage offset-5 col-2">
@@ -248,11 +322,21 @@ function Profile(){
                 </table>
             </div>            
             <div className="Reports">
+                {/* {for(let i = 0 ; i < reports.length; i++){
+
+                }} */}
+            
+            <h2 className="offset-1">You have {reports.length} reports</h2>
+
+            {reports?.map((doc)=>(                
+                <Report file={doc.data().file}/>
+            ))}
+
+                {/* <Report />
                 <Report />
                 <Report />
                 <Report />
-                <Report />
-                <Report />
+                <Report /> */}
             </div>
 
 
