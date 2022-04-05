@@ -51,7 +51,7 @@ function Login() {
   return (
     <div className="login">
       <div className="login__container">
-        <img src="./heartfavicon.jpg" alt="/" />
+        <img src="./heartfavicon.jpg" alt="/"  style={{borderRadius: "25%"}} />
         <h1>Sign in to Dhadkan</h1>
         <Button onClick={signIn}>Sign In With Google</Button>
       </div>
