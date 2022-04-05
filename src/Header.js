@@ -108,7 +108,7 @@ function Header() {
                 }}
               >
                <Avatar src={user?.photoURL} alt={user?.displayName} />
-               <h4 className="d-none d-md-block">{user?.displayName}</h4>
+               <h5 className="d-none d-md-block">{user?.displayName}</h5>
                
               </NavLink>
             
@@ -122,3 +122,9 @@ function Header() {
 }
 
 export default Header;
+
+// db.collection("users").doc(authUser.user.uid).set({
+//   branch: "",
+//   section: "",
+//   year: "",
+// });

@@ -1,11 +1,12 @@
 import "./Profile.css"
 import React from 'react';
 import Report from './Report';
-
-
-
+import { useStateValue } from "./StateProvider";
+import EditIcon from "@material-ui/icons/Edit";
 
 function Profile(){
+
+    const [{ user } ] = useStateValue();
 
     return (
         <>
@@ -22,7 +23,7 @@ function Profile(){
                     <tbody>
                         <tr>
                         <th scope="row">Name</th>
-                        <td>Mark</td>      
+                        <td>{user?.displayName}</td>      
                         </tr>
                         <tr>
                         <th scope="row">Age</th>
