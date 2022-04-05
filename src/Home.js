@@ -132,11 +132,17 @@ function Home() {
         </div>
         <div classname="row">
           <div className="col-12 text-center p-5">
-            <PDFDownloadLink document={pdf} fileName="somename.pdf">
-              {({ blob, url, loading, error }) =>
-                loading ? "Loading document..." : "Download now!"
-              }
-            </PDFDownloadLink>
+            <Button variant="contained" color="warning" size="large">
+              <PDFDownloadLink
+                document={pdf}
+                fileName="somename.pdf"
+                style={{ color: "white", textDecoration: "none" }}
+              >
+                {({ blob, url, loading, error }) =>
+                  loading ? "Loading document..." : "Download now!"
+                }
+              </PDFDownloadLink>
+            </Button>
           </div>
         </div>
       </div>
