@@ -4,6 +4,7 @@ import { useStateValue } from "./StateProvider";
 import { onValue, ref } from "firebase/database";
 import CircularSlider from "@fseehawer/react-circular-slider";
 import Button from "@mui/material/Button";
+import { uploadBytes } from "firebase/storage";
 import {
   collection,
   collectionGroup,
@@ -13,7 +14,7 @@ import {
   query,
   where,
 } from "firebase/firestore";
-
+import { storage } from "./firebase";
 import {
   PDFDownloadLink,
   Document,
@@ -87,7 +88,7 @@ function Home() {
   const [spO2, setSpO2] = useState(0);
   const [temperature, setTemperature] = useState(0);
   const [pdf, setPdf] = useState(null);
-  const [details, setDetails] = React.useState(null);
+  const [details, setDetails] = useState(null);
   const [{ user }] = useStateValue();
 
   useEffect(() => {
@@ -193,10 +194,16 @@ function Home() {
                 fileName={`report_${new Date().toString()}.pdf`}
                 style={{ color: "white", textDecoration: "none" }}
               >
-                {({ blob, url, loading, error }) =>
-                  console.log(blob) || //blob: the blob object of the pdf
-                  (loading ? "Loading document..." : "Generate Report")
-                }
+                {({ blob, url, loading, error }) => {
+                  if (loading) {
+                    return "Loading document...";
+                  } else {
+                    console.log(blob); //blob: the blob object of the pdf
+                    console.log(url); //url: the url of the pdf
+
+                    return "Generate Report";
+                  }
+                }}
               </PDFDownloadLink>
             </Button>
           </div>

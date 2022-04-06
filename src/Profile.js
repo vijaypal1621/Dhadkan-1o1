@@ -122,7 +122,7 @@ function Profile() {
       sex: sex,
       mobile: mobile,
     });
-    console.log("succes");
+    console.log("success");
     setAge("");
     setSex("");
     setMobile("");
