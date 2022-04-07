@@ -9,7 +9,7 @@ import CircularSlider from "@fseehawer/react-circular-slider";
 import Button from "@mui/material/Button";
 // import {storage} from './firebase';
 import { getStorage} from "firebase/storage";
-import reportUpload from './reportUpload';
+// import reportUpload from './reportUpload';
 
 
 import {
@@ -89,18 +89,18 @@ function GeneratePDF(temperature, spO2, pulseRate, details, user) {
   );
 }
 
-const uploadReport = (blob)=>{
-  if(blob !== null){
-    // setBlobFile(blob);
-    console.log(blob);
-//     const storage = getStorage();
+// const uploadReport = (blob)=>{
+//   if(blob !== null){
+//     // setBlobFile(blob);
+//     console.log(blob);
+// //     const storage = getStorage();
 
-// // Create a storage reference from our storage service
-// const storageRef = ref(storage);
+// // // Create a storage reference from our storage service
+// // const storageRef = ref(storage);
     
-  }
+//   }
   
-}
+// }
 
 function Home() {
   const [pulseRate, setPulseRate] = useState(0);
