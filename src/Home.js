@@ -77,6 +77,9 @@ function GeneratePDF(temperature, spO2, pulseRate, details, user) {
             Gender: {details === null ? "" : details?.sex}
           </Text>
           <Text style={styles.info}>
+            Blood Group: {details === null ? "" : details?.blood}
+          </Text>
+          <Text style={styles.info}>
             Mobile Number: {details === null ? "" : details?.mobile}
           </Text>
           <Text style={styles.info}>Email: {user?.email}</Text>
@@ -124,7 +127,7 @@ function Home() {
       setTemperature(snapshot.val().temperature);
       setPdf(GeneratePDF(temperature, spO2, pulseRate, details, user));
     });
-  }, [pulseRate, spO2, temperature, user?.uid]);
+  }, [pulseRate, spO2, temperature, user, user?.uid]);
 
   return (
     <div
