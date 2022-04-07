@@ -1,6 +1,3 @@
-// import firebase from 'firebase/compat/app';
-
-// import firebase from "./firebase";
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 // import { getAnalytics } from "firebase/analytics";
@@ -17,14 +14,14 @@ import "firebase/storage";
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyAORT5BzPs7vEZkRn0jvrilO6I164Fqqk0",
-  authDomain: "dhadkan-1o1.firebaseapp.com",
-  databaseURL: "https://dhadkan-1o1-default-rtdb.firebaseio.com",
-  projectId: "dhadkan-1o1",
-  storageBucket: "dhadkan-1o1.appspot.com",
-  messagingSenderId: "1071661286989",
-  appId: "1:1071661286989:web:95ab5bcde4ea758628be04",
-  measurementId: "G-60PGVQXDD7",
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+  databaseURL: process.env.REACT_APP_FIREBASE_DATABASE_URL,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_FIREBASE_APP_ID,
+  measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID,
 };
 
 // Initialize Firebase
@@ -33,14 +30,7 @@ const db = getFirestore(app);
 const storage = getStorage(app);
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
-// const storage = firebase.storage();
-// const auth = firebase.auth();
-// const provider = new firebase.auth.GoogleAuthProvider();
 
 export const realdb = getDatabase(app);
-// export {db,auth};
 export { auth, provider, db, storage };
 export default db;
-
-// export default db;
-// export default firebase;

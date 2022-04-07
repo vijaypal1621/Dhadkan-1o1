@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { realdb, db } from "./firebase";
+import { realdb, db, storage } from "./firebase";
 import { useStateValue } from "./StateProvider";
-import { onValue ,ref} from "firebase/database";
+
+import { onValue, ref as databaseReference } from "firebase/database";
+import { ref as storageReference, uploadBytes } from "firebase/storage";
+
 import CircularSlider from "@fseehawer/react-circular-slider";
 import Button from "@mui/material/Button";
 // import {storage} from './firebase';
@@ -15,11 +18,8 @@ import {
   doc,
   setDoc,
   onSnapshot,
-  query,
-  where,
 } from "firebase/firestore";
-
-import {
+import ReactPDF, {
   PDFDownloadLink,
   Document,
   View,
@@ -107,23 +107,19 @@ function Home() {
   const [spO2, setSpO2] = useState(0);
   const [temperature, setTemperature] = useState(0);
   const [pdf, setPdf] = useState(null);
-  const [details, setDetails] = React.useState(null);
+  const [details, setDetails] = useState(null);
   const [{ user }] = useStateValue();
   const [blobFile, setBlobFile] = useState(null);
 
   useEffect(() => {
-    const unsub = onSnapshot(doc(db, "users", user?.uid), (doc) => {
-      // console.log("Current data: ", doc.data());
+    onSnapshot(doc(db, "users", user?.uid), (doc) => {
       setDetails(doc.data());
-      // console.log(doc.collection);
-      // console.log(doc.reports);
-
-      onValue(ref(realdb), (snapshot) => {
-        setPulseRate(snapshot.val().pulse);
-        setSpO2(snapshot.val().spo2);
-        setTemperature(snapshot.val().temperature);
-        setPdf(GeneratePDF(temperature, spO2, pulseRate, details, user));
-      });
+    });
+    onValue(databaseReference(realdb), (snapshot) => {
+      setPulseRate(snapshot.val().pulse);
+      setSpO2(snapshot.val().spo2);
+      setTemperature(snapshot.val().temperature);
+      setPdf(GeneratePDF(temperature, spO2, pulseRate, details, user));
     });
   }, [pulseRate, spO2, temperature, user?.uid]);
 
@@ -209,16 +205,45 @@ function Home() {
         </div>
         <div classname="row">
           <div className="col-12 text-center p-5">
-            <Button variant="contained" color="warning" size="large">
+            <Button
+              variant="contained"
+              color="warning"
+              onClick={() => {
+                ReactPDF.pdf(pdf)
+                  .toBlob()
+                  .then((blobRes) => {
+                    const storageRef = storageReference(
+                      storage,
+                      `reports/${user?.uid}/${new Date().toString()}`
+                    );
+
+                    uploadBytes(storageRef, blobRes).then((snapshot) => {
+                      console.log("Uploaded a blob or file!");
+                    });
+                    console.log(blobRes);
+                  })
+                  .catch((err) => {
+                    console.error("Error:" + err);
+                  });
+              }}
+              size="large"
+            >
               <PDFDownloadLink
                 document={pdf}
                 fileName={`report_${new Date().toString()}.pdf`}
                 style={{ color: "white", textDecoration: "none" }}
               >
-                {({ blob, url, loading, error }) =>
-                  uploadReport(blob) || //blob: the blob object of the pdf
-                  (loading ? "Loading document..." : "Generate Report")
-                }
+
+                {({ blob, url, loading, error }) => {
+                  if (loading) {
+                    return "Loading document...";
+                  } else if (error) {
+                    return "Error loading document...";
+                  } else {
+                    return "Generate Report";
+                  }
+                }}
+
               </PDFDownloadLink>
             </Button>
           </div>
