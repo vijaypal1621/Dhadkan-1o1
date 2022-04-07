@@ -1,10 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { realdb, db, storage } from "./firebase";
 import { useStateValue } from "./StateProvider";
+
 import { onValue, ref as databaseReference } from "firebase/database";
 import { ref as storageReference, uploadBytes } from "firebase/storage";
+
 import CircularSlider from "@fseehawer/react-circular-slider";
 import Button from "@mui/material/Button";
+// import {storage} from './firebase';
+import { getStorage} from "firebase/storage";
+import reportUpload from './reportUpload';
+
+
 import {
   collection,
   collectionGroup,
@@ -22,6 +29,8 @@ import ReactPDF, {
   Image,
 } from "@react-pdf/renderer";
 
+
+// console.log(storage);
 function GeneratePDF(temperature, spO2, pulseRate, details, user) {
   const styles = StyleSheet.create({
     image: {
@@ -80,6 +89,19 @@ function GeneratePDF(temperature, spO2, pulseRate, details, user) {
   );
 }
 
+const uploadReport = (blob)=>{
+  if(blob !== null){
+    // setBlobFile(blob);
+    console.log(blob);
+//     const storage = getStorage();
+
+// // Create a storage reference from our storage service
+// const storageRef = ref(storage);
+    
+  }
+  
+}
+
 function Home() {
   const [pulseRate, setPulseRate] = useState(0);
   const [spO2, setSpO2] = useState(0);
@@ -87,6 +109,7 @@ function Home() {
   const [pdf, setPdf] = useState(null);
   const [details, setDetails] = useState(null);
   const [{ user }] = useStateValue();
+  const [blobFile, setBlobFile] = useState(null);
 
   useEffect(() => {
     onSnapshot(doc(db, "users", user?.uid), (doc) => {
@@ -108,6 +131,7 @@ function Home() {
         backgroundImage: `url("https://www.sleepfoundation.org/wp-content/uploads/2021/06/Physical-Health.jpg")`,
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
+        minHeight: "88vh"
       }}
     >
       <div className="row pt-5 pb-5 text-center">
@@ -209,6 +233,7 @@ function Home() {
                 fileName={`report_${new Date().toString()}.pdf`}
                 style={{ color: "white", textDecoration: "none" }}
               >
+
                 {({ blob, url, loading, error }) => {
                   if (loading) {
                     return "Loading document...";
@@ -218,9 +243,11 @@ function Home() {
                     return "Generate Report";
                   }
                 }}
+
               </PDFDownloadLink>
             </Button>
           </div>
+          <reportUpload blob = {blobFile}/>
         </div>
       </div>
     </div>

@@ -254,12 +254,12 @@ function Profile() {
           </tbody>
         </table>
       </div>
-      <div className="Reports">
+      {/* <div className="Reports">
         <h2 className="offset-1">You have {reports.length} reports</h2>
         {reports?.map((doc) => (
           <Report file={doc.data().file} />
         ))}
-      </div>
+      </div> */}
     </>
   );
 }
