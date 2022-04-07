@@ -6,6 +6,7 @@ import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { useStateValue } from "./StateProvider";
 import Login from "./Login";
+import Footer from './Footer';
 
 function App() {
   const [{ user }] = useStateValue();
@@ -25,6 +26,7 @@ function App() {
                 <Route exact path="/" component={Home} />
               </Switch>
             </div>
+            <Footer />
           </>
         )}
       </div>

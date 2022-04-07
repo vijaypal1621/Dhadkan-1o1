@@ -33,6 +33,7 @@ import ReactPDF, {
 
 // console.log(storage);
 function GeneratePDF(temperature, spO2, pulseRate, details, user) {
+  // console.log(details)
   const styles = StyleSheet.create({
     image: {
       marginTop: "0px",
@@ -115,6 +116,7 @@ function Home() {
   useEffect(() => {
     onSnapshot(doc(db, "users", user?.uid), (doc) => {
       setDetails(doc.data());
+      // console.log(doc.data());
     });
     onValue(databaseReference(realdb), (snapshot) => {
       setPulseRate(snapshot.val().pulse);
