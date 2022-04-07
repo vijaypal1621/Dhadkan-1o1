@@ -152,7 +152,7 @@ function Home() {
               dataIndex={temperature - 32}
               appendToValue={"F"}
               onChange={(value) => {
-                console.log(value);
+                // console.log(value);
               }}
               labelFontSize={"1.5rem"}
             />
@@ -175,7 +175,7 @@ function Home() {
                 dataIndex={pulseRate}
                 appendToValue={"bpm"}
                 onChange={(value) => {
-                  console.log(value);
+                  // console.log(value);
                 }}
               />
             </strong>
@@ -198,7 +198,7 @@ function Home() {
                 dataIndex={spO2}
                 appendToValue={"%"}
                 onChange={(value) => {
-                  console.log(value);
+                  // console.log(value);
                 }}
               />
             </strong>
@@ -219,32 +219,29 @@ function Home() {
                     );
 
                     uploadBytes(storageRef, blobRes).then((snapshot) => {
-                      console.log("Uploaded a blob or file!");
+                      // console.log("Uploaded a blob or file!");
                       getDownloadURL(storageRef)
-  .then((url) => {
-    // `url` is the download URL for 'images/stars.jpg'
-      console.log(url);
-    // This can be downloaded directly:
-    const path = `users/${user?.uid}/reports`;
-      addDoc(collection(db,path),{
-        file : url,
-        name : new Date().toString()
-      })
+                      .then((url) => {
+                        // `url` is the download URL for 'images/stars.jpg'
+                          // console.log(url);
+                        // This can be downloaded directly:
+                        const path = `users/${user?.uid}/reports`;
+                          addDoc(collection(db,path),{
+                            file : url,
+                            name : new Date().toString()
+                          })
 
-    // Or inserted into an <img> element
-    
-  })
-  .catch((error) => {
-    // Handle any errors
-  });
-
-
-
+                        // Or inserted into an <img> element
+                        
+                      })
+                      .catch((error) => {
+                        // Handle any errors
+                      });
                     });
-                    console.log(blobRes);
+                    // console.log(blobRes);
                   })
                   .catch((err) => {
-                    console.error("Error:" + err);
+                    // console.error("Error:" + err);
                   });
               }}
               size="large"

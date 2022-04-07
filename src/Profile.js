@@ -85,7 +85,7 @@ function Profile() {
     const d = onSnapshot(
       collection(db, path),
       (snap) => {
-        console.log(doc);
+        // console.log(doc);
       }
     );
 
@@ -94,35 +94,35 @@ function Profile() {
       collection(db, ref),
       (snapshot) => {
         snapshot.docs.forEach((doc) => {
-          console.log(doc.data());
+          // console.log(doc.data());
         });
         setReports(snapshot.docs);
       },
       (error) => {
-        console.log(error);
+        // console.log(error);
       }
     );
   }, []);
 
   const handleOpenModal = () => {
-    console.log("open");
+    // console.log("open");
 
     setOpenModal(true);
   };
   const handleClose = () => {
-    console.log("close");
+    // console.log("close");
     setOpenModal(false);
   };
   const handleUpdate = (e) => {
     e.preventDefault();
-    console.log(db);
+    // console.log(db);
     setDoc(doc(db, "users", user?.uid), {
       age: age,
       blood: blood,
       sex: sex,
       mobile: mobile,
     });
-    console.log("success");
+    // console.log("success");
     setAge("");
     setSex("");
     setMobile("");
@@ -197,7 +197,7 @@ function Profile() {
     </div>
   );
 
-  console.log(user);
+  // console.log(user);
 
   return (
     <>

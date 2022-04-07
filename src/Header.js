@@ -88,18 +88,20 @@ function Header() {
               </NavLink>
             </Tooltip>
           </div>
-
-          <NavLink
-            to="/profile"
-            onClick={() => {
-              // const currentPage = document.getElementById(current);
-              // currentPage.classList.remove("header__option--active");
-              // setCurrent("home");
-            }}
-          >
-            <Avatar src={user?.photoURL} alt={user?.displayName} />
-            {/* <h5 className="d-none d-md-block">{user?.displayName}</h5> */}
-          </NavLink>
+          <Tooltip title = "Profile">
+            <NavLink
+              to="/profile"
+              onClick={() => {
+                // const currentPage = document.getElementById(current);
+                // currentPage.classList.remove("header__option--active");
+                // setCurrent("home");
+              }}
+            >
+              <Avatar src={user?.photoURL} alt={user?.displayName} />
+              {/* <h5 className="d-none d-md-block">{user?.displayName}</h5> */}
+            </NavLink>
+          </Tooltip>
+          
         </div>
       </div>
     </div>
