@@ -81,9 +81,9 @@ function Profile() {
     const unsub = onSnapshot(doc(db, "users", user?.uid), (doc) => {
       setDetails(doc.data());
     });
-
+    const path = `users/${user?.uid}/reports`
     const d = onSnapshot(
-      collection(db, "users/lTcjV3oVvWOntLgS9vVhIVhNfp73/reports"),
+      collection(db, path),
       (snap) => {
         console.log(doc);
       }
@@ -254,12 +254,12 @@ function Profile() {
           </tbody>
         </table>
       </div>
-      {/* <div className="Reports">
+      <div className="Reports">
         <h2 className="offset-1">You have {reports.length} reports</h2>
         {reports?.map((doc) => (
           <Report file={doc.data().file} />
         ))}
-      </div> */}
+      </div>
     </>
   );
 }

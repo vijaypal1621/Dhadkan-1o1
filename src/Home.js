@@ -3,8 +3,8 @@ import { realdb, db, storage } from "./firebase";
 import { useStateValue } from "./StateProvider";
 
 import { onValue, ref as databaseReference } from "firebase/database";
-import { ref as storageReference, uploadBytes } from "firebase/storage";
-
+import { ref as storageReference, uploadBytes,getDownloadURL } from "firebase/storage";
+// import { collection, addDoc } from "firebase/firestore"; 
 import CircularSlider from "@fseehawer/react-circular-slider";
 import Button from "@mui/material/Button";
 // import {storage} from './firebase';
@@ -17,6 +17,7 @@ import {
   collectionGroup,
   doc,
   setDoc,
+  addDoc,
   onSnapshot,
 } from "firebase/firestore";
 import ReactPDF, {
@@ -219,6 +220,26 @@ function Home() {
 
                     uploadBytes(storageRef, blobRes).then((snapshot) => {
                       console.log("Uploaded a blob or file!");
+                      getDownloadURL(storageRef)
+  .then((url) => {
+    // `url` is the download URL for 'images/stars.jpg'
+      console.log(url);
+    // This can be downloaded directly:
+    const path = `users/${user?.uid}/reports`;
+      addDoc(collection(db,path),{
+        file : url
+        
+      })
+
+    // Or inserted into an <img> element
+    
+  })
+  .catch((error) => {
+    // Handle any errors
+  });
+
+
+
                     });
                     console.log(blobRes);
                   })
