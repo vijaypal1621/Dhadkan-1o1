@@ -134,7 +134,7 @@ function Home() {
       className="container-fluid"
       style={{
         //backgroundImage: `linear-gradient(to right, #f6d365 0%, #fda085 100%)`,
-        backgroundImage: `url("https://www.sleepfoundation.org/wp-content/uploads/2021/06/Physical-Health.jpg")`,
+        backgroundImage: `url("./bg2.jpg")`,
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
         minHeight: "88vh"
