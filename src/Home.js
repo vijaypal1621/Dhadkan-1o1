@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { realdb, db } from "./firebase";
 import { useStateValue } from "./StateProvider";
-import { onValue, ref } from "firebase/database";
+import { onValue ,ref} from "firebase/database";
 import CircularSlider from "@fseehawer/react-circular-slider";
 import Button from "@mui/material/Button";
+// import {storage} from './firebase';
+import { getStorage} from "firebase/storage";
+import reportUpload from './reportUpload';
+
+
 import {
   collection,
   collectionGroup,
@@ -24,6 +29,8 @@ import {
   Image,
 } from "@react-pdf/renderer";
 
+
+// console.log(storage);
 function GeneratePDF(temperature, spO2, pulseRate, details, user) {
   const styles = StyleSheet.create({
     image: {
@@ -82,6 +89,19 @@ function GeneratePDF(temperature, spO2, pulseRate, details, user) {
   );
 }
 
+const uploadReport = (blob)=>{
+  if(blob !== null){
+    // setBlobFile(blob);
+    console.log(blob);
+//     const storage = getStorage();
+
+// // Create a storage reference from our storage service
+// const storageRef = ref(storage);
+    
+  }
+  
+}
+
 function Home() {
   const [pulseRate, setPulseRate] = useState(0);
   const [spO2, setSpO2] = useState(0);
@@ -89,6 +109,7 @@ function Home() {
   const [pdf, setPdf] = useState(null);
   const [details, setDetails] = React.useState(null);
   const [{ user }] = useStateValue();
+  const [blobFile, setBlobFile] = useState(null);
 
   useEffect(() => {
     const unsub = onSnapshot(doc(db, "users", user?.uid), (doc) => {
@@ -114,6 +135,7 @@ function Home() {
         backgroundImage: `url("https://www.sleepfoundation.org/wp-content/uploads/2021/06/Physical-Health.jpg")`,
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
+        minHeight: "88vh"
       }}
     >
       <div className="row pt-5 pb-5 text-center">
@@ -194,12 +216,13 @@ function Home() {
                 style={{ color: "white", textDecoration: "none" }}
               >
                 {({ blob, url, loading, error }) =>
-                  console.log(blob) || //blob: the blob object of the pdf
+                  uploadReport(blob) || //blob: the blob object of the pdf
                   (loading ? "Loading document..." : "Generate Report")
                 }
               </PDFDownloadLink>
             </Button>
           </div>
+          <reportUpload blob = {blobFile}/>
         </div>
       </div>
     </div>
