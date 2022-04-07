@@ -227,8 +227,8 @@ function Home() {
     // This can be downloaded directly:
     const path = `users/${user?.uid}/reports`;
       addDoc(collection(db,path),{
-        file : url
-        
+        file : url,
+        name : new Date().toString()
       })
 
     // Or inserted into an <img> element

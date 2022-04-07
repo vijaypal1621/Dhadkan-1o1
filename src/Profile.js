@@ -257,7 +257,7 @@ function Profile() {
       <div className="Reports">
         <h2 className="offset-1">You have {reports.length} reports</h2>
         {reports?.map((doc) => (
-          <Report file={doc.data().file} />
+          <Report file={doc.data().file} name={doc.data().name} />
         ))}
       </div>
     </>
