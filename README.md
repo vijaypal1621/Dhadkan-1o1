@@ -1,70 +1,86 @@
-# Getting Started with Create React App
+### Objective
+Health Monitoring System provides the scientific and factual database essential to informed decision making and appropriate public health action. The key objective of surveillance is to provide information to guide interventions. The public health objectives and actions needed to make successful interventions determine the design and implementation of surveillance systems. For example, if the objective is to prevent the spread of epidemics of acute infectious diseases, such as SARS, managers need to intervene quickly to stop the spread of disease. Therefore, they need a surveillance system that provides rapid early warning information from clinics
+and laboratories. In contrast, chronic diseases and health-related behaviours
+change slowly. Managers typically monitor the effect of programs to change
+risky behaviours such as tobacco smoking or chronic diseases once a year or
+even less often. A monitoring system to measure the population effects of a
+tuberculosis control program might provide information only every one to five
+years—for example, through a series of demographic and health surveys. The
+principle is that different public health objectives and the actions required to
+reach them require different information systems. The type of action that can
+be taken, when or how often that action needs to be taken, what information
+is needed to take or monitor the action, and when or how frequently the
+information is needed should determine the type of surveillance or health
+information system.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Motivation
 
-## Available Scripts
+Here are the main motivations for a health monitoring system and the great
+reasons to develop it for a better doctor-patient communication and proper
+medical attention :
 
-In the project directory, you can run:
+1. Real-time health monitoring systems using IoT can help doctors prioritise
+patients, and provide urgent care to those who are in the most danger
+thereby saving lives.
+2. More competent patient management can help utilise the resources of the
+hospital more wisely and save money.
+3. It is easy to use the system for patients and medical professionals.
+4. The remote health monitoring system is especially useful to monitor
+patients with chronic diseases. Most chronic diseases are incurable, so it is
+necessary to monitor the state of the patient while at home, and quickly
+respond if health indicators worsen.
 
-### `yarn start`
+5. The HMS is convenient and portable so it is very convenient for doctors to
+manage patients from one app, and it is also very easy for patients to
+monitor their own health by wearing a lightweight device like a bracelet.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Hardware Components
+1) Heart Rate Sensor
+The working of this sensor can be done by connecting it from the
+fingertip or human ear to Arduino board. So that heart rate can be easily
+calculated. The pulse sensor includes a 24 inches color code cable, ear
+clip, Velcro Dots-2, transparent stickers-3, etc.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+• A colour code cable is connected to header connectors. So this sensor
+is easily connected to an Arduino into the project without soldering.
 
-### `yarn test`
+• An ear clip size is the same as a heart rate sensor and it can be
+connected using hot glue at the backside of the sensor to wear on the
+earlobe.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+• Two Velcro dots are completely sized toward the sensor at the hook
+side. These are extremely useful while making a Velcro strap to cover
+approximately a fingertip. This is used to cover the Sensor around the
+finger.
 
-### `yarn build`
+• Transparent strikers are protection layers used to protect the sensor
+from sweaty earlobes and fingers. This sensor includes three holes in
+the region of the external edge so that one can easily connect anything
+to it.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+2) Wifi Module ESP8266
+The ESP8266 WiFi Module is a self contained SOC with integrated TCP/
+IP protocol stack that can give any micro-controller access to your WiFi
+network. The ESP8266 is capable of either hosting an application or
+offloading all WiFi networking functions from another application
+processor. Each ESP8266 module comes pre-programmed with an AT
+command set firmware, meaning, you can simply hook this up to your
+Arduino device and get about as much WiFi-ability as a WiFi Shield
+offers.
+This module has a powerful enough on-board processing and
+storage capability that allows it to be integrated with the sensors and
+other application specific devices through its GPIOs with minimal
+development up-front and minimal loading during runtime. Its high
+degree of on-chip integration allows for minimal external circuitry,
+including the front-end module, is designed to occupy minimal PCB area.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+The ESP8266 supports APSD for VoIP applications and Bluetooth
+co-existence interfaces, it contains a self-calibrated RF allowing it to
+work under all operating conditions, and requires no external RF parts.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+3) Circuit
+The entire project is based on the NodeMcu ESP8266 as the system's
+main brain. The ESP8266 controller is connected to all of the sensor relays.
+To monitor pulse, the pulse sensor module is employed. It outputs the BPM.
+The sensor outputs are sent to the NodeMcu ESP8266 and shown in the
+user's Web application through the Internet.
